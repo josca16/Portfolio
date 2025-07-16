@@ -24,7 +24,7 @@ export default function ExperienceItem({ experience }) {
                         src={image}
                         alt={`${company} logo`}
                         fill
-                        className="object-contain p-2"
+                        className={company === "CodeArts Solutions" ? "object-cover" : "object-contain p-2"}
                     />
                 </div>
                 <div>
