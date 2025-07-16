@@ -27,7 +27,7 @@ export default function Header() {
     ];
 
     return (
-        <header className="relative py-12 px-6 overflow-hidden">
+        <header className="relative py-8 sm:py-12 px-4 sm:px-6 overflow-hidden">
             {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/30 via-blue-900/30 to-cyan-900/30"></div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/30"></div>
@@ -39,17 +39,18 @@ export default function Header() {
                 <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-cyan-500/10 rounded-full blur-2xl animate-pulse delay-500"></div>
             </div>
 
-            <div className="relative max-w-7xl mx-auto flex items-center justify-between">
-                {/* Left section: Profile picture and name */}
-                <div className="flex items-center gap-4 md:gap-8">
+            <div className="relative max-w-7xl mx-auto">
+                {/* Mobile layout: Stacked vertically */}
+                <div className="flex flex-col items-center text-center space-y-6 sm:hidden">
+                    {/* Profile picture */}
                     <div className="relative">
                         <div className="relative rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-2xl">
                             <Image
                                 src="/social/profile.png"
                                 alt="Profile picture"
-                                width={160}
-                                height={200}
-                                className="w-auto h-32 md:h-40"
+                                width={120}
+                                height={150}
+                                className="w-auto h-24"
                                 priority
                             />
                         </div>
@@ -57,52 +58,123 @@ export default function Header() {
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/20 to-blue-600/20 blur-xl animate-pulse"></div>
                     </div>
                     
-                    <div className="flex flex-col">
-                        <h1 className="text-2xl md:text-5xl font-bold leading-tight text-white mb-2">
+                    {/* Name and title */}
+                    <div className="flex flex-col space-y-2">
+                        <h1 className="text-xl font-bold leading-tight text-white">
                             {developerName}
                         </h1>
-                        <p className="text-base md:text-xl text-gray-300 mb-3">
+                        <p className="text-sm text-gray-300">
                             {jobTitle}
                         </p>
-                        <div className="hidden md:flex flex-col text-sm text-gray-400 space-y-1">
-                            <span className="flex items-center">
-                                <span className="mr-2">📧</span>
-                                josecarlosmartinez98@outlook.com
-                            </span>
-                            <span className="flex items-center">
-                                <span className="mr-2">📱</span>
-                                +34 618927313
-                            </span>
-                        </div>
+                    </div>
+
+                    {/* Social media links */}
+                    <div className="flex items-center gap-3">
+                        {socialLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative group transition-all duration-300 hover:scale-110"
+                                aria-label={link.alt}
+                            >
+                                {/* Background glow */}
+                                <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-md group-hover:bg-cyan-500/30 transition-all duration-300"></div>
+                                
+                                {/* Icon container */}
+                                <div className="relative w-10 h-10 bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-full flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm">
+                                    <Image
+                                        src={link.icon}
+                                        alt={link.alt}
+                                        width={20}
+                                        height={20}
+                                        className="w-5 h-5 filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                                    />
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Contact info for mobile */}
+                    <div className="flex flex-col text-xs text-gray-400 space-y-1">
+                        <span className="flex items-center justify-center">
+                            <span className="mr-2">📧</span>
+                            josecarlosmartinez98@outlook.com
+                        </span>
+                        <span className="flex items-center justify-center">
+                            <span className="mr-2">📱</span>
+                            +34 618927313
+                        </span>
                     </div>
                 </div>
 
-                {/* Right section: Social media links */}
-                <div className="flex items-center gap-4">
-                    {socialLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative group transition-all duration-300 hover:scale-110"
-                            aria-label={link.alt}
-                        >
-                            {/* Background glow */}
-                            <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-md group-hover:bg-cyan-500/30 transition-all duration-300"></div>
-                            
-                            {/* Icon container */}
-                            <div className="relative w-12 h-12 bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-full flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm">
+                {/* Desktop layout: Horizontal */}
+                <div className="hidden sm:flex items-center justify-between">
+                    {/* Left section: Profile picture and name */}
+                    <div className="flex items-center gap-4 md:gap-8">
+                        <div className="relative">
+                            <div className="relative rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-2xl">
                                 <Image
-                                    src={link.icon}
-                                    alt={link.alt}
-                                    width={24}
-                                    height={24}
-                                    className="w-6 h-6 filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                                    src="/social/profile.png"
+                                    alt="Profile picture"
+                                    width={160}
+                                    height={200}
+                                    className="w-auto h-32 md:h-40"
+                                    priority
                                 />
                             </div>
-                        </Link>
-                    ))}
+                            {/* Glow effect */}
+                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/20 to-blue-600/20 blur-xl animate-pulse"></div>
+                        </div>
+                        
+                        <div className="flex flex-col">
+                            <h1 className="text-2xl md:text-5xl font-bold leading-tight text-white mb-2">
+                                {developerName}
+                            </h1>
+                            <p className="text-base md:text-xl text-gray-300 mb-3">
+                                {jobTitle}
+                            </p>
+                            <div className="hidden md:flex flex-col text-sm text-gray-400 space-y-1">
+                                <span className="flex items-center">
+                                    <span className="mr-2">📧</span>
+                                    josecarlosmartinez98@outlook.com
+                                </span>
+                                <span className="flex items-center">
+                                    <span className="mr-2">📱</span>
+                                    +34 618927313
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right section: Social media links */}
+                    <div className="flex items-center gap-4">
+                        {socialLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative group transition-all duration-300 hover:scale-110"
+                                aria-label={link.alt}
+                            >
+                                {/* Background glow */}
+                                <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-md group-hover:bg-cyan-500/30 transition-all duration-300"></div>
+                                
+                                {/* Icon container */}
+                                <div className="relative w-12 h-12 bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-full flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm">
+                                    <Image
+                                        src={link.icon}
+                                        alt={link.alt}
+                                        width={24}
+                                        height={24}
+                                        className="w-6 h-6 filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                                    />
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </div>
             

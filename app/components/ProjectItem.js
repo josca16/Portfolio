@@ -19,25 +19,21 @@ export default function ProjectItem({ project }) {
                 {/* Project Image */}
                 <div className="relative mb-6">
                     <Link
-                        href={`/projects/${title.toLowerCase().replace(/\s+/g, '-')}`}
+                        href={domain}
                         className="block transition-all duration-300 hover:scale-110"
                     >
                         <div className="relative w-full h-48 rounded-xl overflow-hidden shadow-lg border border-gray-600/30 group-hover:border-cyan-500/30 transition-all duration-300">
                             {/* Background for logo consistency */}
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 to-gray-800/80 group-hover:from-cyan-500/10 group-hover:to-blue-600/10 transition-all duration-300"></div>
                             
-                            {/* Logo container with consistent sizing */}
-                            <div className="relative w-full h-full flex items-center justify-center p-4">
+                            {/* Logo container with full coverage */}
+                            <div className="relative w-full h-full flex items-center justify-center">
                                 <Image
                                     src={image}
                                     alt={title || displayName}
-                                    width={140}
-                                    height={140}
-                                    className="object-contain max-w-full max-h-full transition-all duration-300"
-                                    style={{
-                                        maxWidth: '80%',
-                                        maxHeight: '80%'
-                                    }}
+                                    fill
+                                    className="object-cover transition-all duration-300"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             </div>
                             
